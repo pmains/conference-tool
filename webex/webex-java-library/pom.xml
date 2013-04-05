@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!-- $Header:  $ -->
+<!-- ######################################################### -->
+<!--                                                           -->
+<!-- This is a Maven project file.                             -->
+<!-- For more information, see http://maven.apache.org/        -->
+<!--                                                           -->
+<!-- ######################################################### -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <name>webex-java-library</name>
+  <url>http://code.google.com/p/webex-java-library/</url>
+  <groupId>webex-java-library</groupId>
+  <artifactId>webex-java-library</artifactId>
+  <packaging>jar</packaging>
+  <version>0.2-SNAPSHOT</version>
+  <description>Java library for Cisco Webex API</description>
+  <organization>
+    <name>webex-java-library</name>
+    <url>http://code.google.com/p/webex-java-library/</url>
+  </organization>
+  <inceptionYear>2010</inceptionYear>
+
+  <issueManagement>
+  <url>http://code.google.com/p/webex-java-library/issues/list</url>
+  </issueManagement>
+
+  <distributionManagement>
+  </distributionManagement>
+
+  <scm>
+  	    <url>http://webex-java-library.googlecode.com/svn/trunk</url>
+  </scm>
+
+  <mailingLists>
+    <mailingList>
+      <name>webex-java-library mailing list</name>
+      <subscribe>todo</subscribe>
+      <unsubscribe>todo</unsubscribe>
+      <archive>todo</archive>
+    </mailingList>
+  </mailingLists>
+
+  <developers>
+    <developer>
+      <name>Sean C. Sullivan</name>
+      <id>sean --*-- seansullivan --*-- com</id>
+      <email>sean --*-- seansullivan --*-- com</email>
+      <organization></organization>
+    </developer>
+  </developers>
+
+<repositories>
+
+ <!-- 
+    <repository>
+      <id>codehaus-snapshots</id>
+      <name>codehaus-snapshots</name>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <layout>default</layout>
+    </repository>
+   -->
+   <repository>
+      <id>codehaus</id>
+      <name>codehaus</name>
+      <url>http://repository.codehaus.org/</url>
+      <layout>default</layout>
+    </repository>
+</repositories>
+
+  <dependencies>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.0.1</version>
+		</dependency> 
+    <dependency>
+        <groupId>org.apache.xmlbeans</groupId>
+        <artifactId>xmlbeans</artifactId>
+        <version>2.4.0</version>
+    </dependency>
+		<dependency>
+		  <groupId>org.testng</groupId>
+		  <artifactId>testng</artifactId>
+		  <version>5.14.1</version>
+		  <scope>test</scope>
+	  </dependency>
+	<dependency>
+		<groupId>webex-xmlbeans-generated</groupId>
+		<artifactId>webex-xmlbeans-generated</artifactId>
+		<version>0.1</version>
+		<scope>system</scope>
+		<systemPath>${project.basedir}/lib/webex-xmlbeans-generated.jar</systemPath>
+	</dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+          <optimize>false</optimize>
+          <showDeprecations>true</showDeprecations>
+          <fork>true</fork>
+          <meminitial>300m</meminitial>
+          <maxmem>1024m</maxmem>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>xmlbeans-maven-plugin</artifactId>
+        <version>2.3.3</version>
+        <configuration>
+          <memoryInitialSize>256m</memoryInitialSize>
+          <memoryMaximumSize>1024m</memoryMaximumSize>
+          <outputJar>lib/webex-xmlbeans-generated.jar</outputJar>
+        </configuration>
+      </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                          <configuration>
+                    <filters>
+                        <filter>src/assemble/filter.properties</filter>
+                    </filters>
+                    <descriptors>
+                        <descriptor>src/assembly/distribution.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>    
+        </plugins>
+  </build>
+    
+  <reporting>
+		<plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+        </plugin>
+		<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-javadoc-plugin</artifactId>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jxr-plugin</artifactId>
+        </plugin>        
+        </plugins>  
+   </reporting>
+  
+</project>

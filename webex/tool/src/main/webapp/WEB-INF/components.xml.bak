@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- Hibernate -->
+    <bean id="webex.DataSource"
+        class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName">
+            <value>org.hsqldb.jdbcDriver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:hsqldb:mem:webex</value>
+        </property>
+        <property name="username">
+            <value>sa</value>
+        </property>
+        <property name="password">
+            <value></value>
+        </property>
+    </bean>
+
+    <bean id="webexTransactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref bean="webexSessionFactory" />
+        </property>
+    </bean>
+    
+    <bean id="com.ultralinellc.webex.model.ConferenceManager"
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+        init-method="init">
+        <property name="transactionManager">
+            <ref bean="webexTransactionManager" />
+        </property>
+        <property name="target">
+            <bean
+                class="com.ultralinellc.webex.model.ConferenceManagerImpl"
+                singleton="true">
+                <!-- <property name="contextSize">
+                    <value>6</value>
+                </property>
+                <property name="restConfiguration">
+                    <ref bean="org.sakaiproject.api.app.help.RestConfiguration" />
+                </property> -->
+                <property name="sessionFactory">
+                    <ref bean="webexSessionFactory" />
+                </property>
+                <!-- <property name="toolManager">
+                    <ref bean="org.sakaiproject.tool.api.ActiveToolManager" />
+                </property>
+                <property name="serverConfigurationService">
+                    <ref bean="org.sakaiproject.component.api.ServerConfigurationService"/>
+                </property> -->
+                <property name="txManager">
+                    <ref bean="helpTransactionManager" />
+                </property>
+                <!-- <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService"/>
+                <property name="preferencesService" ref="org.sakaiproject.user.api.PreferencesService"/> -->
+            </bean>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- <bean id="org.sakaiproject.springframework.orm.hibernate.impl.AdditionalHibernateMappingsImpl.webex"
+        class="org.sakaiproject.springframework.orm.hibernate.impl.AdditionalHibernateMappingsImpl">
+        <property name="mappingResources">
+            <list>
+                <value>
+                    com/ultralinellc/webex/model/Conference.hbm.xml
+                </value>
+            </list>
+        </property>
+    </bean> -->
+    
+    <bean id="webexSessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+        <property name="dataSource">
+            <ref local="webex.DataSource" />
+        </property>
+
+        <property name="hibernateProperties">
+            <props>
+                <!--
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.HSQLDialect
+                </prop>
+                -->
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.query.substitutions">
+                    true 1, false 0, yes 'Y', no 'N'
+                </prop>
+                <prop key="hibernate.jdbc.use_streams_for_binary">
+                    true
+                </prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+                <!--
+                This will share the cache with the main sessions, but the queries should
+                be unique as will be the resuts so they will not collide.
+                -->
+                <prop key="hibernate.cache.provider_class">
+                     org.sakaiproject.springframework.orm.hibernate.SakaiCacheProvider
+                </prop>
+            </props>
+        </property>
+
+        <!--  update the database schema when starting -->
+        <property name="schemaUpdate">
+            <value>true</value>
+        </property>
+
+        <property name="mappingResources">
+            <list>
+                <value>
+                    com/ultralinellc/webex/model/Conference.hbm.xml
+                </value>
+            </list>
+        </property>
+
+    </bean>
+</beans>

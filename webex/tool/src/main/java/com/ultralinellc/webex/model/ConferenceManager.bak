@@ -1,0 +1,22 @@
+package com.ultralinellc.webex.model;
+
+import java.util.Set;
+import java.util.Date;
+
+public interface ConferenceManager
+{
+  public Conference createConference(final String siteId, String confName, String meetingType,
+      String agenda, String hostUserId, Integer maxUserNumber, Set<String> attendeeIds,
+      Boolean chatEnabled, Boolean pollEnabled, Boolean audioVideoEnabled, Date startDate,
+      Integer duration, Integer timeZoneID, String telephonySupport, String extTelephonyDescription);
+
+  public Conference getConferenceById(final String id);
+
+  public Set<Conference> getConferenceBySite(final String siteId);
+
+  public void saveConference(Conference conference);
+  
+  public void addInviteeToConference(final Conference conference, final String inviteeUserId);
+  
+  public void removeInviteeFromConference(final Conference conference, final String inviteeUserId);
+}

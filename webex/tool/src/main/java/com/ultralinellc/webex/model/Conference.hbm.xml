@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false" package="com.ultralinellc.webex.model">
+ <class name="Conference" table="WEBEX_CONFERENCE">
+  <id column="ID" length="99" name="id" type="string">
+   <generator class="org.sakaiproject.id.hbm.IdGenerator"/>
+  </id>
+  <property generated="never" lazy="false" name="siteId" not-null="true" type="string">
+   <column name="SITE_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="confName"
+   not-null="true" type="string">
+   <column name="CONF_NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="meetingType"
+   not-null="true" type="string">
+   <column name="MEETING_TYPE"/>
+  </property>
+  <property generated="never" lazy="false" name="agenda" not-null="true" type="string">
+   <column name="AGENDA"/>
+  </property>
+  <property generated="never" lazy="false" name="hostUserId"
+   not-null="true" type="string">
+   <column name="HOST_USER_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="maxUserNumber"
+   not-null="true" type="integer">
+   <column name="MAX_USER_NUMBER"/>
+  </property>
+  <set cascade="all" name="attendeeIds" sort="unsorted" table="WEBEX_CONFERENCE_ATTENDEE">
+   <key column="id" foreign-key="CONFERENCE_ID"/>
+   <element column="ATTENDEE_USER_ID" type="string"/>
+  </set>
+  <property generated="never" lazy="false" name="chatEnabled" type="boolean">
+   <column name="CHAT_ENABLED"/>
+  </property>
+  <property generated="never" lazy="false" name="pollEnabled" type="boolean">
+   <column name="POLL_ENABLED"/>
+  </property>
+  <property generated="never" lazy="false" name="audioVideoEnabled" type="boolean">
+   <column name="AUDIO_VIDEO_ENABLED"/>
+  </property>
+  <property generated="never" lazy="false" name="startDate"
+   not-null="true" type="java.util.Date">
+   <column name="START_DATE"/>
+  </property>
+  <property generated="never" lazy="false" name="duration"
+   not-null="true" type="integer">
+   <column name="DURATION"/>
+  </property>
+  <property generated="never" lazy="false" name="timeZoneID" type="integer">
+   <column name="TIME_ZONE_ID"/>
+  </property>
+  <property generated="never" lazy="false" name="telephonySupport" type="string">
+   <column name="TELEPHONY_SUPPORT"/>
+  </property>
+  <property generated="never" lazy="false"
+   name="extTelephonyDescription" type="string">
+   <column name="EXT_TELEPHONY_DESCRIPTION"/>
+  </property>
+ </class>
+ <!-- <query name="findConference">
+        <![CDATA[from com.ultralinellc.webex.model.Conference as item where item.userId = :userId and item.contextId = :contextId]]>
+    </query>
+    
+    <query name="findSyllabusItemByContextId">
+        <![CDATA[from org.sakaiproject.component.app.syllabus.SyllabusItemImpl as item where item.contextId = :contextId]]>
+    </query>-->
+</hibernate-mapping>
