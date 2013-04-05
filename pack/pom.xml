@@ -18,11 +18,11 @@
 
 	<dependencies>
 		<!-- internal dependencies -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.ultralinellc</groupId>
 			<artifactId>webex-impl</artifactId>
 			<version>1.0-SNAPSHOT</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	<build>
 		<!-- configure the build to use the standard maven structure -->
