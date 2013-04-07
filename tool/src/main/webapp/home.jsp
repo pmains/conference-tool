@@ -19,7 +19,7 @@
         <div class="participants">
             <h2>Host</h2>
             <div class="host">James Wilson</div>
-            <div class="invitees">
+            <div class="attendees">
                 ${fn:length(conference.attendeeIds)} Invitees
             </div>
         </div>

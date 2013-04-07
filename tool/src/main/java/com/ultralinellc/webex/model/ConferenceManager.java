@@ -29,7 +29,7 @@ public interface ConferenceManager
 
   public void saveConference(Conference conference);
   
-  public void addInviteeToConference(final Conference conference, final String inviteeUserId);
+  public void addAttendeeToConference(final Conference conference, final String attendeeUserId);
   
-  public void removeInviteeFromConference(final Conference conference, final String inviteeUserId);
+  public void removeAttendeeFromConference(final Conference conference, final String attendeeUserId);
 }

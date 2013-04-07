@@ -16,9 +16,9 @@
     <div class="participants">
         <h2>Host</h2>
         <div class="host">James Wilson</div>
-        <div class="invitees">
-        <c:forEach var="inviteeId" items="${conference.inviteeIds}">
-            <div class="invitee">Bill Smith</div>
+        <div class="attendee">
+        <c:forEach var="attendeeId" items="${conference.attendeeIds}">
+            <div class="attendee">Bill Smith</div>
         </c:forEach>
         </div>
     </div>
