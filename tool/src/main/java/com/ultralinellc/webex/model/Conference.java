@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Conference {
-	private Long id;
+	private String id;
 	private String siteId;
 	private String confName;
 	private String meetingType;

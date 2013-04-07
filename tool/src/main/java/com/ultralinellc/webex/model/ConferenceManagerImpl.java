@@ -21,7 +21,7 @@ public class ConferenceManagerImpl extends HibernateDaoSupport implements Confer
     this.transactionManager = transactionManager;
   }
   
-  public Long createConference(final String siteId, final String confName, final String meetingType,
+  public String createConference(final String siteId, final String confName, final String meetingType,
     final String agenda, final String hostUserId, final Integer maxUserNumber,
     final Set<String> attendeeIds,final Boolean chatEnabled, final Boolean pollEnabled,
     final Boolean audioVideoEnabled, final Date startDate, final Integer duration,
@@ -35,12 +35,12 @@ public class ConferenceManagerImpl extends HibernateDaoSupport implements Confer
                 timeZoneID, telephonySupport, extTelephonyDescription);
 
             // Save the new assignment
-            Long id = (Long)session.save(conf);
+            String id = (String)session.save(conf);
 
             return id;
         }
     };
-    return (Long)getHibernateTemplate().execute(hc);
+    return (String)getHibernateTemplate().execute(hc);
   }
 
   public Conference getConferenceById(final String id) {
