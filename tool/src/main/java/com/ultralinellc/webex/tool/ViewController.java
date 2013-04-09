@@ -9,12 +9,17 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ultralinellc.webex.model.ConferenceManager;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import com.ultralinellc.webex.model.Conference;
 
 public class ViewController implements Controller {
+    @Getter @Setter
+    ConferenceManager conferenceManager;
 
 	/**
 	 * Webex Tool View Conference Controller
@@ -26,25 +31,25 @@ public class ViewController implements Controller {
 			HttpServletResponse arg1) throws Exception {
 		
 		Map<String, Object> modelMap = new HashMap<String,Object>();
-        Conference conference = new Conference();
+        Conference conference = conferenceManager.getConferenceById("d0086d8e-3cf8-4322-b412-388885c7e781"); // new Conference();
 
-        conference.setHostUserId("admin");
-        conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-        conference.setConfName("Class Orientation");
-        conference.setMeetingType("UNSURE");
-        conference.setAgenda("Get to know your professor and fellow students.");
-        conference.setMaxUserNumber(new Integer(4));
-        conference.setChatEnabled(true);
-        conference.setPollEnabled(false);
-        conference.setAudioVideoEnabled(true);
-        conference.setStartDate(new Date());
-        conference.setDuration(new Integer(90));
-        conference.setTimeZoneID(new Integer(4));
-        conference.setTelephonySupport("INCALL");
-        conference.setExtTelephonyDescription("Call in at 1-800-WEB-CALL");
-
-        HashSet<String> attendeeIds = new HashSet<String>();
-        conference.setAttendeeIds(attendeeIds);
+//        conference.setHostUserId("admin");
+//        conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
+//        conference.setConfName("Class Orientation");
+//        conference.setMeetingType("UNSURE");
+//        conference.setAgenda("Get to know your professor and fellow students.");
+//        conference.setMaxUserNumber(new Integer(4));
+//        conference.setChatEnabled(true);
+//        conference.setPollEnabled(false);
+//        conference.setAudioVideoEnabled(true);
+//        conference.setStartDate(new Date());
+//        conference.setDuration(new Integer(90));
+//        conference.setTimeZoneID(new Integer(4));
+//        conference.setTelephonySupport("INCALL");
+//        conference.setExtTelephonyDescription("Call in at 1-800-WEB-CALL");
+//
+//        HashSet<String> attendeeIds = new HashSet<String>();
+//        conference.setAttendeeIds(attendeeIds);
 
 		modelMap.put("conference", conference);
 		

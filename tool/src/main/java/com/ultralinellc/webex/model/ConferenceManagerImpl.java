@@ -1,9 +1,9 @@
 package com.ultralinellc.webex.model;
 
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Date;
+import java.sql.SQLException;
+import java.util.*;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.HibernateException;
 
@@ -53,12 +53,23 @@ public class ConferenceManagerImpl extends HibernateDaoSupport implements Confer
     });
   }
 
-  public Set<Conference> getConferenceBySite(final String siteId) {
-    Set<Conference> confSet = new HashSet<Conference>();
-    return confSet;
+  public List<Conference> getConferencesBySiteId(final String siteId) {
+      return (List<Conference>)getHibernateTemplate().execute(new HibernateCallback() {
+          public Object doInHibernate(Session session) throws HibernateException {
+              Query q = session.createQuery("from Conference as conf where conf.siteId=:siteId");
+              q.setString("siteId", siteId);
+              return q.list();
+          }
+      });
   }
 
-  public void saveConference(Conference conference) {
+  public void updateConference(final Conference conference) {
+      getHibernateTemplate().execute(new HibernateCallback() {
+          public Object doInHibernate(Session session) throws HibernateException, SQLException {
+              session.saveOrUpdate(conference);
+              return null;
+          }
+      });
   }
   
   public void addAttendeeToConference(final Conference conference, final String attendeeUserId) {

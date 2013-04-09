@@ -1,14 +1,13 @@
 package com.ultralinellc.webex.tool;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ultralinellc.webex.model.ConferenceManager;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
@@ -22,14 +21,18 @@ public class HomeController implements Controller {
 	 * @author Peter Mains (peter.mains@gmail.com)
 	 * 
 	 */
+    @Getter @Setter
+    ConferenceManager conferenceManager;
+
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
 		Map<String, Object> model = new HashMap<String,Object>();
-		ArrayList<Conference> conferences = new ArrayList<Conference>();
-        Conference conference = new Conference();
+        List<Conference> conferences = conferenceManager.getConferencesBySiteId("a2679c1a-a7a6-498b-9395-28151de39292");
+//		ArrayList<Conference> conferences = new ArrayList<Conference>();
+//        Conference conference = new Conference();
 
-        conference.setHostUserId("admin");
+/*        conference.setHostUserId("admin");
         conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
         conference.setConfName("Class Orientation");
         conference.setMeetingType("UNSURE");
@@ -47,7 +50,8 @@ public class HomeController implements Controller {
         HashSet<String> attendeeIds = new HashSet<String>();
         conference.setAttendeeIds(attendeeIds);
 
-        conferences.add(conference);
+        conferences.add(conference);*/
+
 
 		model.put("conferences", conferences);
 		

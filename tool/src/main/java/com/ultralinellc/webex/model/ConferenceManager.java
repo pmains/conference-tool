@@ -1,5 +1,6 @@
 package com.ultralinellc.webex.model;
 
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Date;
@@ -25,9 +26,9 @@ public interface ConferenceManager
   
   public Conference getConferenceById(final String id);
   
-  public Set<Conference> getConferenceBySite(final String siteId);
+  public List<Conference> getConferencesBySiteId(final String siteId);
 
-  public void saveConference(Conference conference);
+  public void updateConference(Conference conference);
   
   public void addAttendeeToConference(final Conference conference, final String attendeeUserId);
   

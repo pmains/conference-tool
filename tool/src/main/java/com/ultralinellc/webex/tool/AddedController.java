@@ -36,10 +36,10 @@ public class AddedController implements Controller {
 
         conf.setHostUserId("admin");
         conf.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-        conf.setConfName("Class Orientation");
-        conf.setMeetingType("UNSURE");
-        conf.setAgenda("Get to know your professor and fellow students.");
-        conf.setMaxUserNumber(new Integer(4));
+        conf.setConfName("Lecture 1");
+        conf.setMeetingType("CLASS");
+        conf.setAgenda("Introduction to Quantum Mechanics.");
+        conf.setMaxUserNumber(new Integer(10));
         conf.setChatEnabled(true);
         conf.setPollEnabled(false);
         conf.setAudioVideoEnabled(true);

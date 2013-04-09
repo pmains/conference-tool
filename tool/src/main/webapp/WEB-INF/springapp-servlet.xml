@@ -69,13 +69,16 @@
 	
 	<bean name="/index.htm" class="com.ultralinellc.webex.tool.HomeController">
 		<!-- <property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy"/> -->
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
 	</bean>
 
 	<bean name="/add.htm"    class="com.ultralinellc.webex.tool.AddController"    />
 	<bean name="/added.htm"  class="com.ultralinellc.webex.tool.AddedController">
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
     </bean>
-	<bean name="/view.htm"   class="com.ultralinellc.webex.tool.ViewController"   />
+	<bean name="/view.htm"   class="com.ultralinellc.webex.tool.ViewController">
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+    </bean>
 	<bean name="/edit.htm"   class="com.ultralinellc.webex.tool.EditController"   />
 	<bean name="/delete.htm" class="com.ultralinellc.webex.tool.DeleteController" />
 </beans>
