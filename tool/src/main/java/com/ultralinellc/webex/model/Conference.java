@@ -1,11 +1,14 @@
 package com.ultralinellc.webex.model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
+import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.Set;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
  * Webex Conference
@@ -18,6 +21,17 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Conference {
+    public Conference(ConferenceForm conferenceForm) {
+        try {
+            BeanUtils.copyProperties(this, conferenceForm);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 	private String id;
 	private String siteId;
 	private String confName;

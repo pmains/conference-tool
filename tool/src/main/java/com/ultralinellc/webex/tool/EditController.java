@@ -56,11 +56,13 @@ public class EditController extends AddController {
                     + cf.getHour() + ":" + cf.getMinute() + " " + cf.getAmpm());
             cf.setStartDate(startDate);
 
-            conferenceManager.updateConference(cf);
+            Conference conference = new Conference(cf);
+
+            conferenceManager.updateConference(conference);
         } catch(ParseException pe) {
             pe.printStackTrace();
         }
 
-        return new ModelAndView("editSuccess", "conference", cf);
+        return new ModelAndView("redirect:view.htm?id=" + cf.getId());
     }
 }
