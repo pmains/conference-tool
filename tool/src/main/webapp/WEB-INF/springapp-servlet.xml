@@ -58,6 +58,18 @@
         </property>
     </bean>
     
+    <!--  SakaiProxy -->
+    <bean id="com.ultralinellc.webex.logic.SakaiProxy" class="com.ultralinellc.webex.logic.SakaiProxyImpl" init-method="init">
+        <!-- API injection -->
+        <property name="securityService" ref="org.sakaiproject.authz.api.SecurityService" />
+        <property name="sessionManager" ref="org.sakaiproject.tool.api.SessionManager" />
+        <property name="toolManager" ref="org.sakaiproject.tool.api.ToolManager" />
+        <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService" />
+        <property name="eventTrackingService" ref="org.sakaiproject.event.api.EventTrackingService" />
+        <property name="serverConfigurationService" ref="org.sakaiproject.component.api.ServerConfigurationService" />
+        <property name="siteService" ref="org.sakaiproject.site.api.SiteService" />
+    </bean>
+    
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
@@ -68,17 +80,36 @@
 	</bean>
 	
 	<bean name="/index.htm" class="com.ultralinellc.webex.tool.HomeController">
-		<!-- <property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy"/> -->
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
 	</bean>
 
-	<bean name="/add.htm"    class="com.ultralinellc.webex.tool.AddController"    />
+	<bean name="/add.htm"    class="com.ultralinellc.webex.tool.AddController">
+		<property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy"/>
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+        <property name="siteService" ref="org.sakaiproject.site.api.SiteService" />
+        <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService" />
+    </bean>
 	<bean name="/added.htm"  class="com.ultralinellc.webex.tool.AddedController">
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+    </bean>
+	<bean name="/addSuccess.htm"  class="com.ultralinellc.webex.tool.AddSuccessController">
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
     </bean>
 	<bean name="/view.htm"   class="com.ultralinellc.webex.tool.ViewController">
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
     </bean>
-	<bean name="/edit.htm"   class="com.ultralinellc.webex.tool.EditController"   />
-	<bean name="/delete.htm" class="com.ultralinellc.webex.tool.DeleteController" />
+	<bean name="/edit.htm"   class="com.ultralinellc.webex.tool.EditController">
+        <property name="formView" value="edit" />
+        <property name="successView" value="editSuccess" />
+        <property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy"/>
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+        <property name="siteService" ref="org.sakaiproject.site.api.SiteService" />
+        <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService" />
+    </bean>
+	<bean name="/deleteConfirm.htm" class="com.ultralinellc.webex.tool.DeleteConfirmController">
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+    </bean>
+	<bean name="/delete.htm" class="com.ultralinellc.webex.tool.DeleteController">
+        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+    </bean>
 </beans>

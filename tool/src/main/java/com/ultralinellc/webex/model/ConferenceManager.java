@@ -23,12 +23,16 @@ public interface ConferenceManager
     final Set<String> attendeeIds,final Boolean chatEnabled, final Boolean pollEnabled,
     final Boolean audioVideoEnabled, final Date startDate, final Integer duration,
     final Integer timeZoneID, final String telephonySupport, final String extTelephonyDescription);
+
+  public String createConference(Conference conference);
   
   public Conference getConferenceById(final String id);
   
   public List<Conference> getConferencesBySiteId(final String siteId);
 
   public void updateConference(Conference conference);
+
+  public void deleteConference(final Conference conference);
   
   public void addAttendeeToConference(final Conference conference, final String attendeeUserId);
   

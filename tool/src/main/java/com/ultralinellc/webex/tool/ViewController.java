@@ -29,27 +29,10 @@ public class ViewController implements Controller {
 	 */
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
+        String confId = arg0.getParameter("id");
 		
 		Map<String, Object> modelMap = new HashMap<String,Object>();
-        Conference conference = conferenceManager.getConferenceById("d0086d8e-3cf8-4322-b412-388885c7e781"); // new Conference();
-
-//        conference.setHostUserId("admin");
-//        conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-//        conference.setConfName("Class Orientation");
-//        conference.setMeetingType("UNSURE");
-//        conference.setAgenda("Get to know your professor and fellow students.");
-//        conference.setMaxUserNumber(new Integer(4));
-//        conference.setChatEnabled(true);
-//        conference.setPollEnabled(false);
-//        conference.setAudioVideoEnabled(true);
-//        conference.setStartDate(new Date());
-//        conference.setDuration(new Integer(90));
-//        conference.setTimeZoneID(new Integer(4));
-//        conference.setTelephonySupport("INCALL");
-//        conference.setExtTelephonyDescription("Call in at 1-800-WEB-CALL");
-//
-//        HashSet<String> attendeeIds = new HashSet<String>();
-//        conference.setAttendeeIds(attendeeIds);
+        Conference conference = conferenceManager.getConferenceById(confId);
 
 		modelMap.put("conference", conference);
 		

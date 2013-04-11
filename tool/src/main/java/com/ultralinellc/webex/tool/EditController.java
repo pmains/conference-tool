@@ -1,20 +1,29 @@
 package com.ultralinellc.webex.tool;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ultralinellc.webex.model.ConferenceForm;
+import com.ultralinellc.webex.model.ConferenceManager;
+import lombok.Getter;
+import lombok.Setter;
+
+import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import com.ultralinellc.webex.model.Conference;
 
-public class EditController implements Controller {
+public class EditController extends AddController {
 
 	/**
 	 * Webex Tool View Conference Controller
@@ -22,32 +31,36 @@ public class EditController implements Controller {
 	 * @author Peter Mains (peter.mains@gmail.com)
 	 * 
 	 */
-	public ModelAndView handleRequest(HttpServletRequest arg0,
-			HttpServletResponse arg1) throws Exception {
-		
-		Map<String, Object> modelMap = new HashMap<String,Object>();
-        Conference conference = new Conference();
+    public EditController() {
+        setCommandClass(ConferenceForm.class);
+        setCommandName("conferenceForm");
+    }
 
-        conference.setHostUserId("admin");
-        conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-        conference.setConfName("Class Orientation");
-        conference.setMeetingType("UNSURE");
-        conference.setAgenda("Get to know your professor and fellow students.");
-        conference.setMaxUserNumber(new Integer(4));
-        conference.setChatEnabled(true);
-        conference.setPollEnabled(false);
-        conference.setAudioVideoEnabled(true);
-        conference.setStartDate(new Date());
-        conference.setDuration(new Integer(90));
-        conference.setTimeZoneID(new Integer(4));
-        conference.setTelephonySupport("INCALL");
-        conference.setExtTelephonyDescription("Call in at 1-800-WEB-CALL");
+    @Override
+    protected Object formBackingObject(HttpServletRequest request) {
+        String id = request.getParameter("id");
+        Conference conference = conferenceManager.getConferenceById(id);
+        ConferenceForm conferenceForm = new ConferenceForm(conference);
+        return conferenceForm;
+    }
 
-        HashSet<String> attendeeIds = new HashSet<String>();
-        conference.setAttendeeIds(attendeeIds);
+    @Override
+    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response,
+                                    Object command, BindException errors) throws Exception {
+        ConferenceForm cf = null;
+        try {
+            cf = (ConferenceForm)command;
+            SimpleDateFormat sdf = new SimpleDateFormat("M-d-y h:m a");
 
-		modelMap.put("conference", conference);
-		
-		return new ModelAndView("editConference", modelMap);
-	}
+            Date startDate = sdf.parse(cf.getMonth() + "-" + cf.getDate() + "-" + cf.getYear() + " "
+                    + cf.getHour() + ":" + cf.getMinute() + " " + cf.getAmpm());
+            cf.setStartDate(startDate);
+
+            conferenceManager.updateConference(cf);
+        } catch(ParseException pe) {
+            pe.printStackTrace();
+        }
+
+        return new ModelAndView("editSuccess", "conference", cf);
+    }
 }

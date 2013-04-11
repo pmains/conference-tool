@@ -43,6 +43,14 @@ public class ConferenceManagerImpl extends HibernateDaoSupport implements Confer
     return (String)getHibernateTemplate().execute(hc);
   }
 
+  public String createConference(Conference conf) {
+    return createConference(conf.getSiteId(), conf.getConfName(), conf.getMeetingType(),
+        conf.getAgenda(), conf.getHostUserId(), conf.getMaxUserNumber(),
+        conf.getAttendeeIds(), conf.getChatEnabled(), conf.getPollEnabled(),
+        conf.getAudioVideoEnabled(), conf.getStartDate(), conf.getDuration(),
+        conf.getTimeZoneID(), conf.getTelephonySupport(), conf.getExtTelephonyDescription());
+  }
+
   public Conference getConferenceById(final String id) {
     return (Conference)getHibernateTemplate().execute(new HibernateCallback() {
         public Object doInHibernate(Session session) throws HibernateException {
@@ -67,6 +75,15 @@ public class ConferenceManagerImpl extends HibernateDaoSupport implements Confer
       getHibernateTemplate().execute(new HibernateCallback() {
           public Object doInHibernate(Session session) throws HibernateException, SQLException {
               session.saveOrUpdate(conference);
+              return null;
+          }
+      });
+  }
+
+  public void deleteConference(final Conference conference) {
+      getHibernateTemplate().execute(new HibernateCallback() {
+          public Object doInHibernate(Session session) throws HibernateException, SQLException {
+              session.delete(conference);
               return null;
           }
       });

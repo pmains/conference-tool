@@ -43,7 +43,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils-core</artifactId>
+            <version>1.8.0</version>
+        </dependency>
 
         <!-- we are running a webapp in a servlet container so we need the servlet API -->
         <dependency>

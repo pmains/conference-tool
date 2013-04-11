@@ -10,7 +10,7 @@
     <c:set value="${conferences[i]}" var="conf" />
     <div class="conference">
         <div class="summary">
-            <h2 class="title"><a href="view.htm">${conference.confName}</a></h2>
+            <h2 class="title"><a href="view.htm?id=${conference.id}">${conference.confName}</a></h2>
             <div class="date">${conference.startDate}</div>
             <div class="date">${conference.duration}</div>
             <div class="description">${conference.agenda}</div>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="buttons">
-            <button value="edit">EDIT</button> <button value="delete">DELETE</button>
+            <a href="edit.htm?id=${conference.id}">edit</a> <a href="deleteConfirm.htm?id=${conference.id}">delete</a>
         </div>
     </div>
 </c:forEach>
