@@ -21,6 +21,9 @@
         </c:forEach>
         </div>
     </div>
-    <div class="buttons"><button value="edit">Edit</button> <button value="delete">Delete</button></div>
+    <div class="buttons">
+        <button id="${conference.id}" value="edit">Edit</button>
+        <button id="${conference.id}" value="delete">Delete</button>
+    </div>
 </div>
 <jsp:directive.include file="/templates/footer.jsp"/>

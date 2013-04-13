@@ -27,14 +27,14 @@
             <form:checkboxes path="attendeeIds" items="${siteUsers}" itemLabel="displayName" itemValue="id" />
         </div>
         <div class="field">
-            <form:label path="chatEnabled">Chat Enabled</form:label><form:input path="chatEnabled" />
+            <form:label path="chatEnabled">Chat Enabled</form:label><form:checkbox path="chatEnabled" />
         </div>
         <div class="field">
-            <form:label path="pollEnabled">Poll Enabled</form:label><form:input path="pollEnabled" />
+            <form:label path="pollEnabled">Poll Enabled</form:label><form:checkbox path="pollEnabled" />
         </div>
         <div class="field">
             <form:label path="audioVideoEnabled">Audio/Video Enabled</form:label>
-            <form:input path="audioVideoEnabled" />
+            <form:checkbox path="audioVideoEnabled" />
         </div>
         <div class="field">
             <form:label path="date">Date</form:label><form:select path="date" items="${dates}" />
