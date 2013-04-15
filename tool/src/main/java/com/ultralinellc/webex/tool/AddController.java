@@ -78,6 +78,7 @@ public class AddController extends SimpleFormController {
     @Override
     protected Object formBackingObject(HttpServletRequest request) {
         ConferenceForm conferenceForm = new ConferenceForm();
+        conferenceForm.setHostSakaiUserId(sakaiProxy.getCurrentUserId());
         conferenceForm.setSakaiSiteId(sakaiProxy.getCurrentSiteId());
         return conferenceForm;
     }

@@ -78,6 +78,7 @@
 	
 	<bean name="/index.htm" class="com.ultralinellc.webex.tool.HomeController">
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
+        <property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy"/>
 	</bean>
 
 	<bean name="/add.htm"    class="com.ultralinellc.webex.tool.AddController">
