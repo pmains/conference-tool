@@ -1,5 +1,7 @@
 package com.ultralinellc.webex.logic;
 
+import org.sakaiproject.user.api.User;
+
 /**
  * An interface to abstract all Sakai related API calls in a central method that can be injected into our app.
  * 
@@ -54,4 +56,13 @@ public interface SakaiProxy {
 	 * @return
 	 */
 	public String getToolSkinCSS(String skinRepo);
+
+    /**
+     * Gets paramters from sakai.properties, local.properties, etc.
+     * @param config    Name of the property
+     * @return
+     */
+    public String getConfigurationProperty(String config);
+
+    User getUser(String userId);
 }

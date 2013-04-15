@@ -8,13 +8,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.webex.schemas.x2002.x06.common.TimeZoneType;
+import com.webex.schemas.x2002.x06.common.MeetingTypeType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,10 +28,10 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
-import com.ultralinellc.webex.model.Conference;
 import com.ultralinellc.webex.model.ConferenceForm;
 import com.ultralinellc.webex.model.ConferenceManager;
 import com.ultralinellc.webex.logic.SakaiProxy;
+import wjlib.WebexClient;
 
 public class AddController extends SimpleFormController {
 
@@ -77,7 +78,7 @@ public class AddController extends SimpleFormController {
     @Override
     protected Object formBackingObject(HttpServletRequest request) {
         ConferenceForm conferenceForm = new ConferenceForm();
-        conferenceForm.setSiteId(sakaiProxy.getCurrentSiteId());
+        conferenceForm.setSakaiSiteId(sakaiProxy.getCurrentSiteId());
         return conferenceForm;
     }
 
@@ -91,6 +92,7 @@ public class AddController extends SimpleFormController {
             User user = userDirectoryService.getUser(member.getUserId());
             siteUsers.add(user);
         }
+        referenceData.put("siteUsers", siteUsers);
         
         List<Integer> months = new ArrayList<Integer>();
         for(int i=0; i<12; i++) {
@@ -117,8 +119,9 @@ public class AddController extends SimpleFormController {
             minutes.add(new Integer(i+1));
         }
         referenceData.put("minutes", minutes);
-        
-        referenceData.put("siteUsers", siteUsers);
+
+        referenceData.put("meetingTypes", MeetingTypeType.Enum.table);
+        referenceData.put("timeZones", TimeZoneType.Enum.table);
 
         return referenceData;
     }

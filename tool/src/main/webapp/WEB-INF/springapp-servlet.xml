@@ -35,12 +35,9 @@
         </property>
         <property name="target">
             <bean class="com.ultralinellc.webex.model.ConferenceManagerImpl">
-                <property name="sessionFactory">
-                    <ref bean="webexSessionFactory" />
-                </property>
-                <property name="transactionManager">
-                    <ref bean="helpTransactionManager" />
-                </property>
+                <property name="sessionFactory" ref="webexSessionFactory" />
+                <property name="transactionManager" ref="webexTransactionManager" />
+                <property name="sakaiProxy" ref="com.ultralinellc.webex.logic.SakaiProxy" />
             </bean>
         </property>
         <property name="transactionAttributes">
@@ -88,9 +85,6 @@
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
         <property name="siteService" ref="org.sakaiproject.site.api.SiteService" />
         <property name="userDirectoryService" ref="org.sakaiproject.user.api.UserDirectoryService" />
-    </bean>
-	<bean name="/added.htm"  class="com.ultralinellc.webex.tool.AddedController">
-        <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />
     </bean>
 	<bean name="/addSuccess.htm"  class="com.ultralinellc.webex.tool.AddSuccessController">
         <property name="conferenceManager" ref="com.ultralinellc.webex.model.ConferenceManager" />

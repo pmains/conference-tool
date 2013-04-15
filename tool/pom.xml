@@ -98,6 +98,13 @@
             <artifactId>webex-java-library</artifactId>
             <version>0.2-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>webex-xmlbeans-generated</groupId>
+            <artifactId>webex-xmlbeans-generated</artifactId>
+            <version>0.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../webex-java-library/lib/webex-xmlbeans-generated.jar</systemPath>
+        </dependency>
 	</dependencies>
 
 	<build>

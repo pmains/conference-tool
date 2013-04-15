@@ -33,10 +33,11 @@ public class Conference {
     }
 
 	private String id;
-	private String siteId;
+	private String sakaiSiteId;
 	private String confName;
 	private String meetingType;
 	private String agenda;
+    private String hostSakaiUserId;
 	private String hostUserId;
 	private Integer maxUserNumber;
 	private Set<String> attendeeIds;

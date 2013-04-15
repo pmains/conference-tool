@@ -4,18 +4,28 @@
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
 <h1>Webex</h1>
+<h2>Edit Conference</h2>
 <div class="conference">
     <form:form method="POST" commandName="conferenceForm">
-        <form:hidden path="siteId" />
+        <form:hidden path="sakaiSiteId" />
         <div class="field">
             <form:label path="confName">Conference Name</form:label><form:input path="confName" />
         </div>
         <div class="field">
-            <form:label path="meetingType">Meeting Type</form:label><form:input path="meetingType" />
+            <form:label path="meetingType">Meeting Type</form:label>
+            <select name="meetingType">
+            <c:forEach begin="1" end="${meetingTypes.lastInt()}" var="index">
+                <option value="${index}"
+                    <c:if test="${conferenceForm.meetingType == index}">selected="selected"</c:if>>
+                    ${meetingTypes.forInt(index)}
+                </option>
+            </c:forEach>
+            </select>
         </div>
         <div class="field">
             <form:label path="agenda">Agenda</form:label><form:input path="agenda" />
         </div>
+        <form:hidden path="hostSakaiUserId" />
         <div class="field">
             <form:label path="hostUserId">Host User ID</form:label><form:input path="hostUserId" />
         </div>
@@ -23,16 +33,17 @@
             <form:label path="maxUserNumber">Max User Number</form:label>
             <form:input path="maxUserNumber" />
         </div>
-        <div class="field">
+        <div class="field attendees">
+            <form:label path="attendeeIds">Attendees</form:label>
             <form:checkboxes path="attendeeIds" items="${siteUsers}" itemLabel="displayName" itemValue="id" />
         </div>
-        <div class="field">
+        <div class="field checkbox">
             <form:label path="chatEnabled">Chat Enabled</form:label><form:checkbox path="chatEnabled" />
         </div>
-        <div class="field">
+        <div class="field checkbox">
             <form:label path="pollEnabled">Poll Enabled</form:label><form:checkbox path="pollEnabled" />
         </div>
-        <div class="field">
+        <div class="field checkbox">
             <form:label path="audioVideoEnabled">Audio/Video Enabled</form:label>
             <form:checkbox path="audioVideoEnabled" />
         </div>
@@ -54,8 +65,15 @@
             <form:label path="duration">Duration (in minutes)</form:label><form:input path="duration" />
         </div>
         <div class="field">
-            <form:label path="timeZoneID">Time Zone (e.g. 1)</form:label>
-            <form:input path="timeZoneID" />
+            <form:label path="timeZoneID">Time Zone</form:label>
+            <select name="timeZoneID">
+            <c:forEach begin="1" end="${timeZones.lastInt()}" var="index">
+                <option value="${index}"
+                    <c:if test="${conferenceForm.timeZoneID == index}">selected="selected"</c:if>>
+                    ${timeZones.forInt(index)}
+                </option>
+            </c:forEach>
+            </select>
         </div>
         <div class="field">
             <form:label path="telephonySupport">Telephony Support</form:label>

@@ -5,6 +5,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ultralinellc.webex.logic.SakaiProxy;
 import com.ultralinellc.webex.model.ConferenceManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,35 +24,14 @@ public class HomeController implements Controller {
 	 */
     @Getter @Setter
     ConferenceManager conferenceManager;
+    @Getter @Setter
+    SakaiProxy sakaiProxy;
 
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
 		Map<String, Object> model = new HashMap<String,Object>();
-        List<Conference> conferences = conferenceManager.getConferencesBySiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-//		ArrayList<Conference> conferences = new ArrayList<Conference>();
-//        Conference conference = new Conference();
-
-/*        conference.setHostUserId("admin");
-        conference.setSiteId("a2679c1a-a7a6-498b-9395-28151de39292");
-        conference.setConfName("Class Orientation");
-        conference.setMeetingType("UNSURE");
-        conference.setAgenda("Get to know your professor and fellow students.");
-        conference.setMaxUserNumber(new Integer(4));
-        conference.setChatEnabled(true);
-        conference.setPollEnabled(false);
-        conference.setAudioVideoEnabled(true);
-        conference.setStartDate(new Date());
-        conference.setDuration(new Integer(90));
-        conference.setTimeZoneID(new Integer(4));
-        conference.setTelephonySupport("INCALL");
-        conference.setExtTelephonyDescription("Call in at 1-800-WEB-CALL");
-
-        HashSet<String> attendeeIds = new HashSet<String>();
-        conference.setAttendeeIds(attendeeIds);
-
-        conferences.add(conference);*/
-
+        List<Conference> conferences = conferenceManager.getConferencesBySiteId(sakaiProxy.getCurrentSiteId());
 
 		model.put("conferences", conferences);
 		

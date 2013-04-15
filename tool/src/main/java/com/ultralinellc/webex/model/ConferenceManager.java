@@ -18,8 +18,8 @@ public interface ConferenceManager
   
   public void setTransactionManager(HibernateTransactionManager transactionManager);
   
-  public String createConference(final String siteId, final String confName, final String meetingType,
-    final String agenda, final String hostUserId, final Integer maxUserNumber,
+  public String createConference(final String sakaiSiteId, final String confName, final String meetingType,
+    final String agenda, final String sakaiHostUserId, final String hostUserId, final Integer maxUserNumber,
     final Set<String> attendeeIds,final Boolean chatEnabled, final Boolean pollEnabled,
     final Boolean audioVideoEnabled, final Date startDate, final Integer duration,
     final Integer timeZoneID, final String telephonySupport, final String extTelephonyDescription);

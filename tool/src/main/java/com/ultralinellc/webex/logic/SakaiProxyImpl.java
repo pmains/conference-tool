@@ -10,6 +10,7 @@ import org.sakaiproject.event.api.EventTrackingService;
 import org.sakaiproject.site.api.SiteService;
 import org.sakaiproject.tool.api.SessionManager;
 import org.sakaiproject.tool.api.ToolManager;
+import org.sakaiproject.user.api.User;
 import org.sakaiproject.user.api.UserDirectoryService;
 import org.sakaiproject.user.api.UserNotDefinedException;
 
@@ -78,8 +79,24 @@ public class SakaiProxyImpl implements SakaiProxy {
 		
 		return skinRepo + "/" + skin + "/tool.css";
 	}
-	
-	/**
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getConfigurationProperty(String config) {
+        return serverConfigurationService.getString("config");
+    }
+
+    public User getUser(String userId) {
+        try {
+            return userDirectoryService.getUser(userId);
+        } catch (UserNotDefinedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
 	 * init - perform any actions required here for when this bean starts up
 	 */
 	public void init() {

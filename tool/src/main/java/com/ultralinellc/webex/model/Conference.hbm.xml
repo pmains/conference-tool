@@ -6,8 +6,8 @@
   <id column="ID" length="99" name="id" type="string">
    <generator class="org.sakaiproject.id.hbm.IdGenerator"/>
   </id>
-  <property generated="never" lazy="false" name="siteId" not-null="true" type="string">
-   <column name="SITE_ID"/>
+  <property generated="never" lazy="false" name="sakaiSiteId" not-null="true" type="string">
+   <column name="SAKAI_SITE_ID"/>
   </property>
   <property generated="never" lazy="false" name="confName"
    not-null="true" type="string">
@@ -19,6 +19,10 @@
   </property>
   <property generated="never" lazy="false" name="agenda" not-null="true" type="string">
    <column name="AGENDA"/>
+  </property>
+  <property generated="never" lazy="false" name="hostSakaiUserId"
+   not-null="true" type="string">
+   <column name="HOST_SAKAI_USER_ID"/>
   </property>
   <property generated="never" lazy="false" name="hostUserId"
    not-null="true" type="string">
